@@ -3,6 +3,9 @@
 version: 2
 jobs:
     build:
+        branches:
+            only:
+            - final
         docker:
             - image: circleci/android:api-25-alpha
 
