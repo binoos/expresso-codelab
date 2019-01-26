@@ -53,12 +53,10 @@ jobs:
                     --type instrumentation \
                     --app app/build/outputs/apk/prod/debug/app-prod-debug.apk \
                     --test app/build/outputs/apk/androidTest/mock/debug/app-mock-debug-androidTest.apk 
+
             - run:
                 name: Install gsutil dependency and copy test results data
                 command: |
-                  echo ${CIRCLE_ARTIFACTS}
+                  echo "${CIRCLE_ARTIFACTS}"
                   sudo pip install -U crcmod
                   sudo gsutil -m cp -r -U `sudo gsutil ls gs://test-lab-mzisj6ddf91fi-kd2xvqcsfti8k | tail -1` ${CIRCLE_ARTIFACTS}/ | true
-            - store_artifacts:
-                path: firebase/
-                destination: /firebase/
