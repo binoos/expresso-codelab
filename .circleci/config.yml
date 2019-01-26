@@ -59,7 +59,6 @@ jobs:
                   echo ${CIRCLE_ARTIFACTS}
                   sudo pip install -U crcmod
                   sudo gsutil -m cp -r -U `sudo gsutil ls gs://test-lab-mzisj6ddf91fi-kd2xvqcsfti8k | tail -1` ${CIRCLE_ARTIFACTS}/ | true
-            - *persist_firebase_workspace
             - store_artifacts:
                 path: firebase/
                 destination: /firebase/
