@@ -52,8 +52,7 @@ jobs:
                   sudo gcloud firebase test android run \
                     --type instrumentation \
                     --app app/build/outputs/apk/prod/debug/app-prod-debug.apk \
-                    --test app/build/outputs/apk/androidTest/mock/debug/app-mock-debug-androidTest.apk \
-                    --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+                    --test app/build/outputs/apk/androidTest/mock/debug/app-mock-debug-androidTest.apk 
             - run:
                 name: Install gsutil dependency and copy test results data
                 command: |
