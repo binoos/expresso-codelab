@@ -40,6 +40,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -119,8 +120,8 @@ public class NotesScreenTest {
 
         // Save the note
         onView(withId(R.id.fab_add_notes)).perform(click());
-        onView(withId(R.id.notes_list)).check(matches(isDisplayed()));
-        
+        onView(withId(R.id.notes_list)).check(matches(isCompletelyDisplayed()));
+
         // Scroll notes list to added note, by finding its description
         onView(withId(R.id.notes_list)).perform(
                 scrollTo(hasDescendant(withText(newNoteDescription))));
