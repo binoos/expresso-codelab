@@ -7,9 +7,7 @@ jobs:
             only:
             - firebase
         docker:
-            - image: circleci/android:api-25-alpha
-
-        working_directory: ~/code
+            - image: circleci/android:api-27-alpha
         environment:
             JVM_OPTS: -Xmx3200m
         steps:
@@ -30,10 +28,9 @@ jobs:
                     - ~/.gradle
                 key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
             - run:
-                name: Build debug APK and release APK
+                name: Build debug APK and test APK
                 command: |
-                  ./gradlew :app:assemble
-                  ./gradlew :app:assembleAndroidTest
+                  ./gradlew :app:assembleDebug :app:assembleAndroidTest
             - run:
                 name: Store Google Service Account
                 command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
@@ -52,10 +49,12 @@ jobs:
                   sudo gcloud firebase test android run \
                     --type instrumentation \
                     --app app/build/outputs/apk/prod/debug/app-prod-debug.apk \
-                    --test app/build/outputs/apk/androidTest/mock/debug/app-mock-debug-androidTest.apk 
-
+                    --test app/build/outputs/apk/androidTest/prod/debug/app-prod-debug-androidTest.apk \
+                    --device model=Nexus6P,version=27,locale=en_US,orientation=portrait \
+                    --device model=taimen,version=27,locale=en_US,orientation=portrait
             - run:
                 name: Install gsutil dependency and copy test results data
                 command: |
+                  echo "${CIRCLE_ARTIFACTS}"
                   sudo pip install -U crcmod
                   sudo gsutil -m cp -r -U `sudo gsutil ls gs://test-lab-mzisj6ddf91fi-kd2xvqcsfti8k | tail -1` ${CIRCLE_ARTIFACTS}/ | true
