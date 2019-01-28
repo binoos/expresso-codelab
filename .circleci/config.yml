@@ -50,8 +50,7 @@ jobs:
                     --type instrumentation \
                     --app app/build/outputs/apk/prod/debug/app-prod-debug.apk \
                     --test app/build/outputs/apk/androidTest/prod/debug/app-prod-debug-androidTest.apk \
-                    --device model=Nexus6P,version=27,locale=en_US,orientation=portrait \
-                    --device model=taimen,version=27,locale=en_US,orientation=portrait
+                    --device model=Nexus6P,version=27,locale=en_US,orientation=portrait 
             - run:
                 name: Install gsutil dependency and copy test results data
                 command: |
