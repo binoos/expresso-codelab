@@ -105,8 +105,8 @@ public class NotesScreenTest {
 
     @Test
     public void addNoteToNotesList() throws Exception {
-        String newNoteTitle = "Espresso";
-        String newNoteDescription = "UI testing for Android";
+        String newNoteTitle = "EspressoNote";
+        String newNoteDescription = "Expresso Note Description";
 
         // Click on the add note button
         onView(withId(R.id.fab_add_notes)).perform(click());
@@ -119,7 +119,8 @@ public class NotesScreenTest {
 
         // Save the note
         onView(withId(R.id.fab_add_notes)).perform(click());
-
+        onView(withId(R.id.notes_list)).check(matches(isDisplayed()));
+        
         // Scroll notes list to added note, by finding its description
         onView(withId(R.id.notes_list)).perform(
                 scrollTo(hasDescendant(withText(newNoteDescription))));
